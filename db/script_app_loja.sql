@@ -44,14 +44,6 @@ CREATE TABLE tbcliente (
     idusuarui INT NOT NULL
 )  ENGINE INNODB;
 
-ALTER TABLE `dbloja`.`tbcliente` 
-CHANGE COLUMN `idcli` `idcli` INT AUTO_INCREMENT PRIMARY KEY;
-
-
-
-
-
-
 CREATE TABLE tbproduto (
     idproduto INT AUTO_INCREMENT PRIMARY KEY,
     nomeproduto VARCHAR(50) NOT NULL,
