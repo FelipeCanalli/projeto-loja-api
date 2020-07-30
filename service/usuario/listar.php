@@ -72,7 +72,7 @@ if($rs->rowCount()>0){
             extract($linha);
             $array_item = array(
                 "idusuario"=>$idusuario,
-                "login"=>$login,
+                "nomeusuario"=>$nomeusuario,
                 "senha"=>$senha,
                 "foto"=>$foto
             );

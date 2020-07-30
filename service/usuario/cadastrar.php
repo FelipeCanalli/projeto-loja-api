@@ -27,8 +27,8 @@ Assim o cliente envia os dados e estes serão convertidos para php.
 $data = json_decode(file_get_contents("php://input"));
 
 // Verificando se os dados vindos do usuário estão preenchidos
-if(!empty($data->login) && !empty($data->senha) && !empty($data->foto)){
-    $usuario->login = $data->login;
+if(!empty($data->nomeusuario) && !empty($data->senha) && !empty($data->foto)){
+    $usuario->nomeusuario = $data->nomeusuario;
     $usuario->senha = $data->senha;
     $usuario->foto = $data->foto;
 

@@ -3,7 +3,7 @@
 
 class Usuario{
     public $idusuario;
-    public $login;
+    public $nomeusuario;
     public $senha;
     public $foto;
 
@@ -32,7 +32,7 @@ class Usuario{
 
              // Função para cadastrar um usuário no banco de dados
             public function cadastro(){
-            $query = "insert into tbusuario set login=:l, senha=:s, foto=:f";
+            $query = "insert into tbusuario set nomeusuario=:l, senha=:s, foto=:f";
         
             $stmt = $this->conexao-> prepare($query);
 
@@ -41,7 +41,7 @@ class Usuario{
 
             // Vamos vincular os dados que vem do app ou navegador com os
             // campos de banco de dados (bind)
-            $stmt->bindParam(":l", $this->login);
+            $stmt->bindParam(":l", $this->nomeusuario);
             $stmt->bindParam(":s", $this->senha);
             $stmt->bindParam(":f", $this->foto);
 
