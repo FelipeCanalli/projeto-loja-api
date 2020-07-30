@@ -1,13 +1,13 @@
 <?php
 
 /* 
-Vamos criar um Header, ou seja, um cabeçalho.
-Esse cabeçalho permite o acesso a listagem de usuarios com diversas origens
-Por isso estamos usando o *(asterisco) para essa permissão que será para 
- - http
- - https
- - file
- - ftp
+    Vamos criar um Header, ou seja, um cabeçalho.
+    Esse cabeçalho permite o acesso a listagem de usuarios com diversas origens
+    Por isso estamos usando o *(asterisco) para essa permissão que será para 
+     - http
+     - https
+     - file
+     - ftp
 */
 
 header("Access-Control-Allow-Origin:*");
@@ -47,42 +47,41 @@ $usuario = new Usuario($db);
 $rs = $usuario->listar();
 
 /* 
-Vamos construir uma estrutura exebir os dados do banco no formato de 
-json.
-Como esses dados estão dispostos em linhas e colunas, nós precisaremos
-criar um array para exibir todos os dados corretamente
+    Vamos construir uma estrutura exebir os dados do banco no formato de 
+    json.
+    Como esses dados estão dispostos em linhas e colunas, nós precisaremos
+    criar um array para exibir todos os dados corretamente
 */
 
 if($rs->rowCount()>0){
     $usuario_arry["saida"] = array();
     
-    /*
+/*
     A estrutura while (enquanto) realiza a busca de todos os usuários 
     cadastrados até o chegar ao final da tabela e traz os dados para 
     fetch array organizar em formato de array.
     Assim será mais fácil de adicionar no array de usuários para apresentar 
     ao final
-    */
+*/
 
-        while($linha = $rs->fetch(PDO::FETCH_ASSOC)){
+    while($linha = $rs->fetch(PDO::FETCH_ASSOC)){
 
-            // O comando extract é capaz de separar de forma mais simples
-            // os campos da tabela tbusuarios
-            
-            extract($linha);
-            $array_item = array(
-                "idusuario"=>$idusuario,
-                "nomeusuario"=>$nomeusuario,
-                "senha"=>$senha,
-                "foto"=>$foto
-            );
+    // O comando extract é capaz de separar de forma mais simples
+    // os campos da tabela tbusuarios     
+    extract($linha);
+    $array_item = array(
+        "idusuario"=>$idusuario,
+        "nomeusuario"=>$nomeusuario,
+        "senha"=>$senha,
+        "foto"=>$foto
+    );
 
-            array_push($usuario_arry["saida"],$array_item);
-        }
+    array_push($usuario_arry["saida"],$array_item);
+    }
 
-        header("HTTP/1.0 200");
-        echo json_encode($usuario_arry);
-} else{
+    header("HTTP/1.0 200");
+    echo json_encode($usuario_arry);
+}else{
     header("HTTP/1.0 400");
     echo json_encode(array("mensagem"=>"Não há usuários cadastrados"));
 }

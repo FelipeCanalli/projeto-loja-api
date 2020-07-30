@@ -4,16 +4,20 @@
 header("Acess-Control-Allow-Origin:*");
 header("Content-Type:application/json;charset=utf-8");
 
-// Para efetuar o cadastro de dados no banco é preciso 
-// informar a api que essa ação irá ocorrer
-header("Access-Control-Allow-Methods:POST");
+/*
+    Para efetuar excluir de dados no banco é preciso 
+    informar a api que essa ação irá ocorrer com o método
+    DELETE, que é responsável pela exclusão de dados da api
+*/
+
+header("Access-Control-Allow-Methods:DELETE");
 
 include_once "../../config/database.php";
 
 include_once "../../domain/usuario.php";
 
 $database = new Database();
-$db = $database->getConnection();
+$db = $database->getConnection();   
 $usuario = new Usuario($db);
 
 /*
@@ -27,22 +31,20 @@ $usuario = new Usuario($db);
 $data = json_decode(file_get_contents("php://input"));
 
 // Verificando se os dados vindos do usuário estão preenchidos
-if(!empty($data->nomeusuario) && !empty($data->senha) && !empty($data->foto)){
-    $usuario->nomeusuario = $data->nomeusuario;
-    $usuario->senha = $data->senha;
-    $usuario->foto = $data->foto;
+if(!empty($data->idusuario)){
+    $usuario->idusuario = $data->idusuario;
 
-    if($usuario->cadastro()){
-        header("HTTP/1.0 201");
-        echo json_encode(array("mensagem"=>"Usuário cadastrado"));
+    if($usuario->apagarUsuario()){
+        header("HTTP/1.0 200");
+        echo json_encode(array("mensagem"=>"Usuário apagado com sucesso"));
 
     }else{
         header("HTTP/1.0 400");
-        echo json_encode(array("mensagem"=>"Não foi possível cadastrar"));
+        echo json_encode(array("mensagem"=>"Não foi possível apagar o usuário"));
     }
 
-}else{
+    }else{
     header("HTTP/1.0 400");
     echo json_encode(array("mensagem"=>"Você precisa preencher todos os campos"));
-}
+    }
 ?>
