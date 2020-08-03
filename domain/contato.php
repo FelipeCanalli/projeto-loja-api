@@ -61,5 +61,25 @@ class Contato{
             return false;
         }  
     }
+
+    /* -------------------------------------------------------------------------- */
+        // Função para alterar dados de contato no banco de dados
+        public function alterarContato(){
+            $query = " update tbcontato set email=:e, telefone=:t where idcontato=:id ";
+
+            $stmt = $this->conexao-> prepare($query);
+
+            // Vamos vincular os dados que vem do app ou navegador com os
+            // campos de banco de dados (bind)
+            $stmt->bindParam(":e",  $this->email);
+            $stmt->bindParam(":t",  $this->telefone);
+            $stmt->bindParam(":id", $this->idcontato);
+
+            if ($stmt->execute()){
+                return true;
+            }else{
+                return false;
+            }    
+        }
 }
 ?>
