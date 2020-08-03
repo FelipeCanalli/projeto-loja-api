@@ -70,5 +70,30 @@ class Endereco{
             return false;
         }
     }
+
+    /* -------------------------------------------------------------------------- */
+
+        // Função para alterar dados de endereço no banco de dados
+        public function alterarEndereco(){
+            $query = " update tbendereco set tipo=:t, logradouro=:l, numero=:n, complemento=:c, bairro=:b, cep=:cep where idendereco=:id ";
+
+            $stmt = $this->conexao-> prepare($query);
+
+            // Vamos vincular os dados que vem do app ou navegador com os
+            // campos de banco de dados (bind)
+            $stmt->bindParam(":t",  $this->tipo);
+            $stmt->bindParam(":l",  $this->logradouro);
+            $stmt->bindParam(":n",  $this->numero);
+            $stmt->bindParam(":c",  $this->complemento);
+            $stmt->bindParam(":b",  $this->bairro);
+            $stmt->bindParam(":cep", $this->cep);
+            $stmt->bindParam(":id", $this->idendereco);
+
+            if ($stmt->execute()){
+                return true;
+            }else{
+                return false;
+            }    
+        }
 }
 ?>   
