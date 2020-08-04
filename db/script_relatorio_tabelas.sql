@@ -1,3 +1,4 @@
+-- Relátorio de usuários
 -- Apelidando tabelas para facilitar
 select 
 us.idusuario,
@@ -21,3 +22,13 @@ inner join tbendereco en on en.idendereco=cl.idendereco
 where us.nomeusuario = 'felipegalvao' and us.senha = md5('senha321'); 
 
 -- tirando o parametro where você consulta todos os dados cadastrados
+
+
+-- Relátorio de pedidos
+select 
+cl.idcli,
+pe.datapedido,
+pr.nomeproduto,
+it.quantidade,
+
+
