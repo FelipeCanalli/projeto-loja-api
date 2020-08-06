@@ -26,9 +26,17 @@ where us.nomeusuario = 'felipegalvao' and us.senha = md5('senha321');
 
 -- Relátorio de pedidos
 select 
-cl.idcli,
+pe.idpedido,
+pe.idcli,
 pe.datapedido,
 pr.nomeproduto,
-it.quantidade,
-
-
+pr.preco,
+ip.quantidade,
+pg.tipo,
+pg.valor,
+pg.parcelas,
+pg.valorparcela
+from tbpedido pe inner join tbitenspedido ip on pe.idpedido=ip.idpedido
+inner join tbproduto pr on ip.idproduto=pr.idproduto
+inner join tbpagamento pg on pg.idpedido = pe.idpedido
+where pe.idcli = 2;
