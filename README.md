@@ -1,4 +1,8 @@
-![Mysql, PHP e JSON](./img/mysql-php-json.png)
+<p float="left">
+  <img src="./img/mysql-php-json-teste.png" width="90%" />
+  <img src="./img/reactnative.gif" width=8%" /> 
+</p>
+
 | Diretório | Descrição |
 | ------ | ------ |
 | [\config](https://github.com/FelipeGalvao1/app-loja-php/tree/master/config) | Responsável por guarda o arquivo de configuração do projeto que faz comunicação com o banco de dados |
