@@ -1,5 +1,5 @@
 <p float="left">
-  <img src="./img/mysql-php-json-teste.png" width="90%" />
+  <img src="./img/mysql-php-json.png" width="90%" />
   <img src="./img/reactnative.gif" width=8%" /> 
 </p>
 
