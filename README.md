@@ -1,6 +1,6 @@
 <p float="left">
   <img src="./img/mysql-php-json.png" width="88%" />
-  <img style="padding-bottom:2%" src="./img/reactnative.gif" width=8%" /> 
+  <img src="./img/reactnative.gif" width=8%" /> 
 </p>
 
 | Diretório | Descrição |
