@@ -1,0 +1,3 @@
+[submodule "app-loja"]
+	path = app-loja
+	url = https://github.com/FelipeGalvao1/app-loja
