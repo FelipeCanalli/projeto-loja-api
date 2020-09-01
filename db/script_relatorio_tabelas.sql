@@ -40,3 +40,6 @@ from tbpedido pe inner join tbitenspedido ip on pe.idpedido=ip.idpedido
 inner join tbproduto pr on ip.idproduto=pr.idproduto
 inner join tbpagamento pg on pg.idpedido = pe.idpedido
 where pe.idcli = 2;
+
+-- Relátorio para a Consulta da Tela Inicial
+select p.idproduto, p.nomeproduto, p.preco, f.foto1 from tbproduto p inner join tbfoto f on p.idfoto=f.idfoto;

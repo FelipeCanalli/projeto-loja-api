@@ -23,5 +23,16 @@ class Produto{
 
         return $stmt;
     }
+
+    /* -------------------------------------------------------------------------- */
+    public function listarTelaInicial(){
+        $query= "select p.idproduto, p.nomeproduto, p.preco, f.foto1 from tbproduto p inner join tbfoto f on p.idfoto=f.idfoto;";
+        
+        $stmt = $this->conexao->prepare($query);
+
+        $stmt->execute();
+
+        return $stmt;
+    }
 }
 ?>   
