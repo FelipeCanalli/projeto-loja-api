@@ -4,6 +4,7 @@ class Login{
     public $idusuario;
     public $nomeusuario;
     public $foto;
+    public $idcli;
     public $nomecli;
     public $cpf;
     public $sexo;
@@ -29,6 +30,7 @@ class Login{
             us.idusuario,
             us.nomeusuario,
             us.foto,
+            cl.idcli,
             cl.nomecli,
             cl.cpf,
             cl.sexo,
@@ -43,7 +45,7 @@ class Login{
             from tbusuario us inner join tbcliente cl on us.idusuario=cl.idusuario
             inner join tbcontato ct on ct.idcontato=cl.idcontato
             inner join tbendereco en on en.idendereco=cl.idendereco
-            where us.nomeusuario=:n and us.senha=:s; ";
+            where us.nomeusuario=:n and us.senha=:s";
             
             // Preparando consulta para ser executada
             $stmt = $this->conexao->prepare($query);

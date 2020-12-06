@@ -5,7 +5,7 @@
     Esse cabeçalho permite o acesso a listagem de usuarios com diversas origens
     Por isso estamos usando o *(asterisco) para essa permissão que será para 
      - http
-     - https 
+     - https
      - file
      - ftp
 */
@@ -17,11 +17,6 @@ header("Access-Control-Allow-Origin:*");
 
 header("Content-Type: application/json;charset=utf-8");
 
-// Para efetuar a consulta de dados no banco vamos utilizar
-// o método POST, vamos postar o nomedeusuario e senha
-
-header("Access-Control-Allow-Methods:POST");
-
 // Abaixo estamos incluindo o arquivo database.php que possui a 
 // classe Database com a conexão com o banco de dados
 
@@ -30,7 +25,7 @@ include_once "../../config/database.php";
 // O arquivo usuario.php será incluido para que a classe Usuario 
 // seja usada. Vale lembrar que esta classe possui o CRUD
 
-include_once "../../domain/login.php";
+include_once "../../domain/pagamento.php";
 
 // Criamos um objeto chamado $database. É uma instância da classe Database
 // que está na pasta config e isso nos dará acesso a todo o seu conteúdo público
@@ -42,18 +37,14 @@ $database = new Database();
 
 $db = $database->getConnection();
  
-// Vamos fazer uma instância da classe Login para ter acesso a todo 
+// Vamos fazer uma instância da classe usuário para ter acesso a todo 
 // o seu conteúdo.
 
-$usuario = new Login($db);
+$pagamento = new Pagamento($db);
 
-// Conversão de dados de json para PHP
-$data = json_decode(file_get_contents("php://input"));
+// rs = resultado
 
-$usuario->nomeusuario = $data->nomeusuario;
-$usuario->senha = $data->senha;
-
-$rs = $usuario->login();
+$rs = $pagamento->listar();
 
 /* 
     Vamos construir uma estrutura exebir os dados do banco no formato de 
@@ -63,7 +54,7 @@ $rs = $usuario->login();
 */
 
 if($rs->rowCount()>0){
-    $usuario_arry["saida"] = array();
+    $pagamento_arry["saida"] = array();
     
 /*
     A estrutura while (enquanto) realiza a busca de todos os usuários 
@@ -76,34 +67,26 @@ if($rs->rowCount()>0){
     while($linha = $rs->fetch(PDO::FETCH_ASSOC)){
 
     // O comando extract é capaz de separar de forma mais simples
-    // os campos da tabela tbusuarios     
+    // os campos da tabela tbpagamentos     
     extract($linha);
     $array_item = array(
-        "idusuario"=>$idusuario,
-        "nomeusuario"=>$nomeusuario,
-        "foto"=>$foto,
-        "idcli"=>$idcli,
-        "nomecli"=>$nomecli,
-        "cpf"=>$cpf,
-        "sexo"=>$sexo,
-        "email"=>$email,
-        "telefone"=>$telefone,
+        "idpagamento"=>$idpagamento,
+        "idpedido"=>$idpedido,
         "tipo"=>$tipo,
-        "logradouro"=>$logradouro,
-        "numero"=>$numero,
-        "complemento"=>$complemento,
-        "bairro"=>$bairro,
-        "cep"=>$cep
+        "descricao"=>$descricao,
+        "valor"=>$valor,
+        "parcelas"=>$parcelas,
+        "valorparcela"=>$valorparcela
     );
 
-    array_push($usuario_arry["saida"],$array_item);
+    array_push($pagamento_arry["saida"],$array_item);
     }
 
     header("HTTP/1.0 200");
-    echo json_encode($usuario_arry);
+    echo json_encode($pagamento_arry);
 }else{
     header("HTTP/1.0 400");
-    echo json_encode(array("mensagem"=>"Nome de usuário ou senha incorretos"));
+    echo json_encode(array("mensagem"=>"Não há usuários cadastrados"));
 }
 
 ?>

@@ -4,6 +4,7 @@ select
 us.idusuario,
 us.nomeusuario,
 us.foto,
+cl.idcli,
 cl.nomecli,
 cl.cpf,
 cl.sexo,
@@ -19,7 +20,8 @@ en.cep
 from tbusuario us inner join tbcliente cl on us.idusuario=cl.idusuario
 inner join tbcontato ct on ct.idcontato=cl.idcontato
 inner join tbendereco en on en.idendereco=cl.idendereco
-where us.nomeusuario = 'felipegalvao' and us.senha = md5('senha321'); 
+ where us.nomeusuario = 'user test' and us.senha = md5('123') 
+; 
 
 -- tirando o parametro where você consulta todos os dados cadastrados
 
@@ -43,3 +45,7 @@ where pe.idcli = 2;
 
 -- Relátorio para a Consulta da Tela Inicial
 select p.idproduto, p.nomeproduto, p.preco, f.foto1 from tbproduto p inner join tbfoto f on p.idfoto=f.idfoto;
+
+-- detalhamento de produto
+select p.idproduto, p.nomeproduto, p.descricao, p.preco, f.foto1,f.foto2, f.foto3, f.foto4
+from tbproduto p inner join tbfoto f on p.idfoto=f.idfoto where idproduto=1;
